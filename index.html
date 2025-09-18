@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Jose Antonio Muñoz de la Calle</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Music&family=Lora&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  >
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <script
+    type="module"
+    src="script.js"
+  ></script>
+</head>
+
+<body>
+  <header>
+    <h1 id="cv-name"></h1>
+    <p id="cv-title"></p>
+  </header>
+
+  <section class="cv">
+    <img
+      id="cv-img"
+      src=""
+      alt="Foto CV"
+    >
+    <div class="cv-info">
+      <h2><i class="fa-solid fa-id-card-clip"></i>&nbsp;Currículum</h2>
+      <p id="cv-bio"></p>
+      <div id="cv-link"></div>
+    </div>
+  </section>
+
+  <section class="compositions">
+    <h2><i class="fa-solid fa-music"></i>&nbsp;Composiciones</h2>
+  </section>
+
+  <!-- Modal -->
+  <div
+    class="modal"
+    id="pdfModal"
+  >
+    <div class="modal-content">
+      <span
+        class="close-btn"
+        onclick="closePDF()"
+      >&times;</span>
+      <iframe id="pdfViewer"></iframe>
+    </div>
+  </div>
+</body>
+
+</html>

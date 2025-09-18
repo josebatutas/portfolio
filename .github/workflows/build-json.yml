@@ -1,0 +1,45 @@
+name: Build compositions.json
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Generate compositions.json
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const docsDir = path.join(process.cwd(), 'docs');
+          const categories = {};
+
+          fs.readdirSync(docsDir).forEach(folder => {
+            const fullPath = path.join(docsDir, folder);
+            if (fs.lstatSync(fullPath).isDirectory()) {
+              const pdfs = fs.readdirSync(fullPath).filter(f => f.endsWith('.pdf'));
+              categories[folder] = pdfs;
+            }
+          });
+
+          fs.writeFileSync(
+            path.join(process.cwd(), 'compositions.json'),
+            JSON.stringify(categories, null, 2)
+          );
+          EOF
+
+      - name: Commit and push compositions.json
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add compositions.json
+          git commit -m "Update compositions.json" || echo "No changes to commit"
+          git push

@@ -1,0 +1,10 @@
+{
+  "name": "Jose Antonio Muñoz de la Calle",
+  "title": "Compositor | Músico | Educador",
+  "photo": "./img/foto1.jpg",
+  "bio": "Breve descripción profesional, experiencia y motivación...",
+  "externalLink": {
+    "label": "O.C.Consort",
+    "url": null
+  }
+}

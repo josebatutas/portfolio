@@ -1,0 +1,282 @@
+:root {
+  --color-white: 255, 255, 255;
+  --color-black: 0, 0, 0;
+  --color-blue: 52, 152, 219;
+  --color-beige: 250, 235, 215;
+  --color-red-pdf: 204, 0, 0;
+  --color-red-dark: 150, 0, 0;
+
+  --color-primary: var(--color-beige);
+  --color-secondary: var(--color-black);
+  --color-accent: var(--color-red-dark);
+
+  --font-size: 16px;
+  --font-family-primary: 'Lora', serif, 'Helvetica Neue', sans-serif;
+  --font-family-secondary: 'Georgia', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: var(--font-size);
+  font-family: var(--font-family-primary);
+  line-height: 1.5rem;
+  letter-spacing: .25rem;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--color-primary));
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.05) 10%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.03) 15%, transparent 60%);
+  background-blend-mode: overlay;
+  color: rgb(var(--color-secondary));
+  overflow-x: hidden;
+}
+
+header {
+  position: relative;
+  text-align: center;
+  padding: 3rem 1rem;
+  background: rgb(var(--color-primary));
+  color: rgb(var(--color-secondary));
+  overflow: hidden;
+
+  h1 {
+    font-family: var(--font-family-secondary);
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 1rem;
+    line-height: 3rem;
+  }
+
+  p {
+    margin-top: .5rem;
+    font-style: italic;
+  }
+}
+
+/**************************************/
+/* SECTIONS: CV & COMPOSITIONS */
+/**************************************/
+
+section {
+  width: calc(100% - 2rem);
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: .5rem;
+    margin: 1rem 0;
+    text-transform: uppercase;
+    font-family: var(--font-family-secondary);
+    border-bottom: 2px solid rgba(var(--color-accent), 1);
+  }
+}
+
+.cv,
+.compositions {
+  color: rgb(var(--color-black));
+  background: rgba(var(--color-white), 0.9);
+  box-shadow: 0 0 8px rgba(var(--color-black), 0.2);
+  border-radius: 1rem;
+}
+
+.cv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  img {
+    width: 100%;
+    max-width: 20rem;
+    margin: 1rem;
+    box-shadow: 0 4px 10px rgba(var(--color-secondary), 0.2);
+    border-radius: 1rem;
+  }
+
+  .cv-info {
+    width: 100%;
+  }
+
+  #cv-link {
+    margin: 2rem 0;
+
+    .other-projects {
+      text-align: center;
+      margin: 1rem 0;
+      font-size: .75rem;
+    }
+  }
+}
+
+.compositions .category {
+  margin-bottom: 1rem;
+
+  .accordion {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    background: rgba(var(--color-white), 0.9);
+    box-shadow: 0 0 8px rgba(var(--color-black), 0.2);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: #e0e0e0;
+    }
+
+    &.selected {
+      color: rgb(var(--color-white));
+      background: rgba(var(--color-accent), .75);
+    }
+
+    .accordion-icon {
+      margin-right: 0.5rem;
+      transition: transform 0.3s;
+    }
+  }
+
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+
+    &.open {
+      max-height: 500px;
+      /* ajusta si hay muchos PDFs */
+    }
+
+    .pdf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .pdf-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 1rem;
+        text-align: center;
+        background: rgb(var(--color-white));
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 1rem;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+
+        .pdf-icon {
+          font-size: 2rem;
+          margin-bottom: 0.5rem;
+        }
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+          .pdf-icon {
+            color: rgb(var(--color-red-pdf));
+          }
+        }
+      }
+    }
+  }
+}
+
+/**************************************/
+/* MODAL */
+/**************************************/
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--color-secondary), 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .modal-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    background: var(--color-primary);
+    border-radius: 1rem 1rem 0 0;
+    overflow: hidden;
+
+    #pdfViewer {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      font-size: 3rem;
+      font-weight: bold;
+      color: rgb(var(--color-white));
+      text-shadow: inset 0 0 1rem rgba(var(--color-red-dark), 0.75);
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+
+      &:hover {
+        color: rgb(var(--color-red-pdf));
+        transition: all 0.5s ease-in-out;
+      }
+    }
+  }
+}
+
+/**************************************/
+/* ANIMATED NOTES */
+/**************************************/
+
+.note {
+  position: absolute;
+  font-size: 5rem;
+  font-family: 'Noto Music', sans-serif;
+  color: rgb(var(--color-accent));
+  animation: float 8s linear infinite;
+  opacity: 0;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0.75;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-20vh) rotate(360deg);
+    opacity: 0.75;
+  }
+}
+
+/**************************************/
+/* MEDIA QUERIES */
+/**************************************/
+
+@media screen and (max-width: 768px) {
+  #cv-bio {
+    text-align: center;
+  }
+}
