@@ -1,9 +1,10 @@
 {
-  "Piano": [
-    "piano1.pdf",
-    "piano2.pdf"
-  ],
-  "Coral": [
+  "coral": [
     "coral1.pdf"
+  ],
+  "piano": [
+    "piano1.pdf",
+    "piano2.pdf",
+    "piano3.pdf"
   ]
 }
