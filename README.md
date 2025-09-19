@@ -1,8 +1,21 @@
 # Portfolio / Legado digital — Instrucciones de uso y mantenimiento
 
-Repositorio pensado para: CV + Composiciones (PDFs) con visor en modal, acordeones por categoría, GitHub Pages y generación automática de `compositions.json` vía GitHub Actions.
+> *“La muerte no es el final si el mensaje perdura.”*
+
+Este proyecto es una plantilla diseñada para crear un sitio web público, replicable y perdurable en el tiempo, que permita compartir contenidos importantes más allá de la vida del autor: videos, audios, documentos, reflexiones, enseñanzas, memorias… todo aquello que merece trascender.
 
 ## ÍNDICE
+- [PLANTILLA](#plantilla)
+  - [¿Para qué sirve?](#para-qué-sirve)
+  - [¿Qué contiene esta plantilla?](#qué-contiene-esta-plantilla)
+  - [¿Cómo usarla?](#cómo-usarla)
+  - [Recomendaciones de durabilidad](#recomendaciones-de-durabilidad)
+  - [Filosofía del proyecto](#filosofía-del-proyecto)
+- [CONSIDERACIONES LEGALES Y HERENCIA](#consideraciones-legales-y-herencia)
+  1. [Designar un albacea digital](#1-designar-un-albacea-digital)
+  2. [Licencia abierta](#2-licencia-abierta)
+  3. [Custodia de archivos originales](#3-custodia-de-archivos-originales)
+  4. [Registrar el sitio en directorios de legado digital](#4-registrar-el-sitio-en-directorios-de-legado-digital)
 - [COMPOSITOR (CLIENTE)](#compositor-cliente)
   1. [Objetivo](#1-objetivo)
   2. [Actualizar el CV](#2-actualizar-el-cv)
@@ -17,6 +30,84 @@ Repositorio pensado para: CV + Composiciones (PDFs) con visor en modal, acordeon
   5. [Personalizaciones comunes (CSS, acento, tipografías)](#5-personalizaciones-habituales)
   6. [Buenas prácticas y seguridad](#6-buenas-prácticas-y-seguridad)
 
+## PLANTILLA
+
+### ¿Para qué sirve?
+
+- Crear una cápsula del tiempo digital con CV y contenidos digitales.
+- Compartir conocimientos, testimonios o historias que no deben perderse.
+- Asegurar que el legado personal o profesional sea accesible, incluso post mortem.
+- Facilitar que otras personas puedan replicar este sitio si desaparece.
+
+### ¿Qué contiene esta plantilla?
+
+- index.html: Página principal con acceso al contenido multimedia.
+- script.js: Script para generar, de forma dinámica, el CV y el listado de contenidos.
+- cv.json | compositions.json: Archivo principal con datos para el CV y los contenidos *(composiciones)*
+- docs/: Carpeta para archivos PDF firmados o con marca de agua.
+- media/: Carpeta para audios y videos (con ejemplos de marca).
+- watermark_file.py: Script Python para poner metadatos o marcas a PDFs.
+- watermark_video.sh: Script para añadir marca de agua visual a videos.
+- README.md: Esta misma guía.
+
+### ¿Cómo usarla?
+
+1. Haz un fork o clona este repositorio.
+
+[![Fork it](https://img.shields.io/badge/Fork%20&%20Build%20Your%20Legacy-blue?style=for-the-badge&logo=github)](https://github.com/{{site.github.username}}/{{site.github.repository_name}}/fork)
+
+2. Reemplaza los contenidos con tus propios archivos: audios, videos, textos.
+3. Personaliza `index.html` y `styles.css` con tu nombre, mensaje, o diseño.
+4. Actualiza los contenidos de `cv.json` y `compositions.json`.
+5. Activa GitHub Pages en la rama principal.
+6. (Opcional) Publica una copia en [Archive.org](https://archive.org/) o en la red [IPFS](https://ipfs.tech/).
+
+### Recomendaciones de durabilidad
+
+- Licencia abierta: Permite que otros lo mantengan vivo.
+- Instrucciones claras: Para facilitar que alguien más lo clone y mantenga.
+- Copia física opcional: Puedes imprimir un código QR que enlace a este sitio, como parte de un testamento, biografía o archivo personal.
+
+### Filosofía del proyecto
+
+Este proyecto nace de la idea de que el conocimiento, las experiencias y los mensajes importantes no deberían morir con nosotros. En una era digital, tenemos la oportunidad de crear ecos duraderos. Este repositorio es solo una chispa: el fuego lo enciendes tú.
+
+---
+
+“No somos eternos, pero nuestros actos pueden serlo.”
+
+## CONSIDERACIONES LEGALES Y HERENCIA
+
+Para que tu legado digital perdure y esté protegido incluso después de tu fallecimiento, es importante tener en cuenta algunos pasos legales y organizativos:
+
+### 1. Designar un albacea digital
+Un albacea digital es una persona de confianza encargada de:
+- Mantener tu sitio activo.
+- Gestionar las credenciales de acceso.
+- Replicar o trasladar el contenido si es necesario.
+
+Cómo hacerlo:
+- Inclúyelo en tu testamento legal o en un documento notarial.
+- Entrega instrucciones claras (digitales y físicas).
+- Usa servicios como Google Inactive Account Manager o Apple Legacy Contact.
+
+### 2. Licencia abierta
+Usa una licencia como Creative Commons Attribution (CC BY 4.0) o MIT para asegurar que:
+- Tu contenido pueda ser replicado legalmente.
+- Cualquiera pueda compartirlo respetando tu autoría.
+
+### 3. Custodia de archivos originales
+Recomendamos:
+- Entregar una copia física o encriptada de tus archivos a alguien de confianza.
+- Subir copias a servicios longevos como [Archive.org](https://archive.org/) o sistemas descentralizados como [IPFS](https://ipfs.tech/).
+
+### 4. Registrar el sitio en directorios de legado digital
+Servicios como MyWishes, Digital Legacy Association o ForeverMissed permiten registrar sitios como este como parte de tu legado póstumo.
+
+---
+
+*Nota: Consulta con un abogado si deseas integrar estas disposiciones en un testamento legal.*
+
 ## COMPOSITOR (CLIENTE)
 
 ### 1) Objetivo
@@ -24,7 +115,7 @@ Repositorio pensado para: CV + Composiciones (PDFs) con visor en modal, acordeon
 - Solo tienes que subir PDFs *(previamente firmados/marcados)* en `/docs/<Categoría>/`.
 - El sistema genera `compositions.json` automáticamente; no necesitas tocar código.
 - GitHub Pages reconstruirá el sitio; *suele estar disponible en segundos a minutos*.
-- URL: https://<USER>.github.io/<REPO>/ *(configurable en Settings → Pages)*.
+- URL: https://{{site.github.username}}.github.io/{{site.github.repository_name}}/ *(configurable en Settings → Pages)*.
 
 ### 2) Actualizar el CV
 Edita el archivo `cv.json` para cambiar:
@@ -110,6 +201,8 @@ with open("original_marcado.pdf", "wb") as f:
 2. Añade el usuario GitHub (ej. tu desarrollador). Dale permiso Write.
 
 Así podrá subir PDFs directamente y ayudar en mantenimiento.
+
+---
 
 ## DESARROLLADORES (FORKS)
 
