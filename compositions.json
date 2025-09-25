@@ -1,3 +1,43 @@
 {
-  "coro": []
+  "coro/escolania": [
+    "Al levantar una lanza.pdf",
+    "CANON Me voy al Coro.pdf",
+    "El capotito (Habanera).pdf",
+    "El vasito de agua.pdf",
+    "Pajarito 2v.pdf",
+    "Sobre tu cunita 2v.pdf"
+  ],
+  "coro/popular": [
+    "CANDELEDA.pdf",
+    "CANTEMOS  breve.pdf",
+    "CANTEMOS.pdf",
+    "CUMPLEAÑOS FELIZ.pdf",
+    "TORERA.pdf",
+    "VEN A CANTAR.pdf"
+  ],
+  "coro/sacro": [
+    "1. SEÑOR TEN PIEDAD.pdf",
+    "2. GLORIA.pdf",
+    "3. ALELUYA.pdf",
+    "4. SANTO.pdf",
+    "5. CORDERO DE DIOS).pdf",
+    "Domine,non sum dignus.pdf"
+  ],
+  "coro/villancicos": [
+    "A la nana mi Niño.pdf",
+    "Alegría, alegría.pdf",
+    "Campana sobre campana.pdf",
+    "Canta, ríe y bebe.pdf",
+    "Con calderos a Belén.pdf",
+    "Din don.pdf",
+    "En el nombre de Jesús.pdf",
+    "Fum Fum Fum.pdf",
+    "La serrana de la Sierra.pdf",
+    "Los campanilleros.pdf",
+    "Madre en la puerta hay un Niño.pdf",
+    "Soy un pobre pastorcito.pdf",
+    "Tan tan, ya vienen los Reyes (J.A.Muñoz).pdf",
+    "Una pandereta suena.pdf",
+    "Vamos todos a Belén.pdf"
+  ]
 }
