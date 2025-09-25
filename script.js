@@ -58,8 +58,7 @@ async function renderCompositions() {
     const container = document.querySelector(".compositions");
 
     Object.entries(categories).forEach(([category, pdfs]) => {
-      const categoryId = `cat-${category.toLowerCase().replace(/\s+/g, '-')}`;
-
+      const categoryId = `cat-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
       const categoryHTML = `
         <div class="container-accordion">
           <h3 class="accordion" data-target="${categoryId}">
@@ -80,21 +79,15 @@ async function renderCompositions() {
       container.insertAdjacentHTML("beforeend", categoryHTML);
     });
 
-    // Add accordion behavior
+    // Attach accordion toggle listeners
     document.querySelectorAll(".accordion").forEach(acc => {
-      acc.addEventListener("click", e => {
-        e.preventDefault();
-        const target = document.getElementById(acc.dataset.target);
-        const offsetTop = target.offsetTop - 100;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: "smooth"
-        });
-        acc.classList.toggle("selected");
-        target.classList.toggle("open");
-        const icon = acc.querySelector(".accordion-icon");
-        icon.classList.toggle("fa-chevron-right");
-        icon.classList.toggle("fa-chevron-down");
+      acc.addEventListener("click", function () {
+        const targetId = this.getAttribute("data-target");
+        const content = document.getElementById(targetId);
+        const icon = this.querySelector(".accordion-icon");
+
+        content.classList.toggle("open");
+        icon.classList.toggle("rotated");
       });
     });
   } catch (error) {

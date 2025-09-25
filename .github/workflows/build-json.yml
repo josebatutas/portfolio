@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - "docs/**"
+      - ".github/workflows/build-json.yml"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -23,35 +25,30 @@ jobs:
           const categories = {};
 
           /**
-           * Recursively collect all PDFs inside a given folder.
-           * @param {string} dir - Directory to scan
-           * @returns {string[]} Array of relative PDF paths
+           * Recursively walk a directory and build categories as relative folders.
+           * Each folder with PDFs becomes a category, and the PDFs are listed without path.
            */
-          function collectPdfs(dir) {
-            let results = [];
-            fs.readdirSync(dir).forEach(item => {
-              const fullPath = path.join(dir, item);
-              const relPath = path.relative(docsDir, fullPath);
-              const stat = fs.lstatSync(fullPath);
+          function walk(dir, relativeBase = '') {
+            const entries = fs.readdirSync(dir, { withFileTypes: true });
+            let pdfs = [];
 
-              if (stat.isDirectory()) {
-                results = results.concat(collectPdfs(fullPath));
-              } else if (stat.isFile() && item.toLowerCase().endsWith('.pdf')) {
-                results.push(relPath.replace(/\\/g, '/')); // normalize for Windows paths
-              }
-            });
-            return results;
-          }
+            for (const entry of entries) {
+              const fullPath = path.join(dir, entry.name);
+              const relPath = path.join(relativeBase, entry.name);
 
-          fs.readdirSync(docsDir).forEach(folder => {
-            const fullPath = path.join(docsDir, folder);
-            if (fs.lstatSync(fullPath).isDirectory()) {
-              const pdfs = collectPdfs(fullPath);
-              if (pdfs.length > 0) {
-                categories[folder] = pdfs;
+              if (entry.isDirectory()) {
+                walk(fullPath, relPath);
+              } else if (entry.isFile() && entry.name.toLowerCase().endsWith('.pdf')) {
+                pdfs.push(entry.name);
               }
             }
-          });
+
+            if (pdfs.length > 0) {
+              categories[relativeBase] = pdfs;
+            }
+          }
+
+          walk(docsDir);
 
           fs.writeFileSync(
             path.join(process.cwd(), 'compositions.json'),
