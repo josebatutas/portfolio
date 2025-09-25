@@ -6,9 +6,36 @@ async function loadCV() {
     document.title = cv.name;
     document.getElementById("cv-name").textContent = cv.name;
     document.getElementById("cv-title").textContent = cv.title;
-    document.getElementById("cv-img").src = cv.photo;
+    document.getElementById("cv-img").src = cv.photoCV;
     document.getElementById("cv-img").alt = cv.name;
-    document.getElementById("cv-bio").textContent = cv.bio;
+    document.getElementById("cv-contact").innerHTML = `
+      <h2><i class="fas fa-envelope"></i> Contacto</h2>
+      <ul>
+        <li><a href="tel:${cv.contact.phone}" target="_blank"><i class="fas fa-phone"></i> ${cv.contact.phone}</a></li>
+        <li><a href="mailto:${cv.contact.email}" target="_blank"><i class="fas fa-envelope"></i> ${cv.contact.email}</a></li>
+      </ul>
+    `;
+
+    const containerBio = document.getElementById("cv-bio");
+    containerBio.innerHTML = cv.bio;
+
+    Object.entries(cv.experience).forEach(([experience, td]) => {
+      const experienceId = `exp-${experience.toLowerCase().replace(/\s+/g, '-')}`;
+      const experienceHTML = `
+        <div class="container-accordion">
+          <h3 class="accordion" data-target="${experienceId}">
+            <i class="accordion-icon fas fa-chevron-right"></i> ${td.title}
+          </h3>
+          <div id="${experienceId}" class="accordion-content">
+            <p class="content">${td.description}</p>
+          </div>
+        </div>
+      `;
+      containerBio.insertAdjacentHTML("beforeend", experienceHTML);
+    });
+
+    const photos = cv.photos.map(photo => `<img src="${photo.src}" alt="${photo.alt}">`).join("");
+    document.getElementById("cv-photos").innerHTML = photos;
 
     const cv_url = cv.externalLink.url;
     document.getElementById("cv-link").innerHTML = `
@@ -34,7 +61,7 @@ async function renderCompositions() {
       const categoryId = `cat-${category.toLowerCase().replace(/\s+/g, '-')}`;
 
       const categoryHTML = `
-        <div class="category">
+        <div class="container-accordion">
           <h3 class="accordion" data-target="${categoryId}">
             <i class="accordion-icon fas fa-chevron-right"></i> ${category}
           </h3>
