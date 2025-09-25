@@ -3,7 +3,7 @@ name: Build compositions.json
 on:
   push:
     paths:
-      - 'docs/**'
+      - "docs/**"
 
 jobs:
   build:
@@ -22,11 +22,34 @@ jobs:
           const docsDir = path.join(process.cwd(), 'docs');
           const categories = {};
 
+          /**
+           * Recursively collect all PDFs inside a given folder.
+           * @param {string} dir - Directory to scan
+           * @returns {string[]} Array of relative PDF paths
+           */
+          function collectPdfs(dir) {
+            let results = [];
+            fs.readdirSync(dir).forEach(item => {
+              const fullPath = path.join(dir, item);
+              const relPath = path.relative(docsDir, fullPath);
+              const stat = fs.lstatSync(fullPath);
+
+              if (stat.isDirectory()) {
+                results = results.concat(collectPdfs(fullPath));
+              } else if (stat.isFile() && item.toLowerCase().endsWith('.pdf')) {
+                results.push(relPath.replace(/\\/g, '/')); // normalize for Windows paths
+              }
+            });
+            return results;
+          }
+
           fs.readdirSync(docsDir).forEach(folder => {
             const fullPath = path.join(docsDir, folder);
             if (fs.lstatSync(fullPath).isDirectory()) {
-              const pdfs = fs.readdirSync(fullPath).filter(f => f.endsWith('.pdf'));
-              categories[folder] = pdfs;
+              const pdfs = collectPdfs(fullPath);
+              if (pdfs.length > 0) {
+                categories[folder] = pdfs;
+              }
             }
           });
 
