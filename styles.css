@@ -211,7 +211,7 @@ section {
 
     .pdf-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
       gap: 1rem;
       margin-top: 1rem;
 
@@ -219,8 +219,9 @@ section {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-evenly;
-        padding: 1rem;
+        justify-content: flex-start;
+        min-width: 15rem;
+        padding: .75rem;
         text-align: center;
         background: rgb(var(--color-white));
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -230,7 +231,12 @@ section {
 
         .pdf-icon {
           font-size: 2rem;
-          margin-bottom: 0.5rem;
+        }
+
+        p {
+          text-align: left;
+          padding: 0 .5rem;
+          font-size: .9rem;
         }
 
         &:hover {
