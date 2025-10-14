@@ -34,8 +34,7 @@ async function loadCV() {
       containerBio.insertAdjacentHTML("beforeend", experienceHTML);
     });
 
-    const photos = cv.photos.map(photo => `<img src="${photo.src}" alt="${photo.alt}">`).join("");
-    document.getElementById("cv-photos").innerHTML = photos;
+    renderGallery(cv.photos);
 
     const cv_url = cv.externalLink.url;
     document.getElementById("cv-link").innerHTML = `
@@ -49,6 +48,89 @@ async function loadCV() {
   } catch (error) {
     console.error("Error loading CV:", error);
   }
+}
+
+function renderGallery(cvPhotos) {
+  // Duplicate the gallery for seamless loop
+  const photos = cvPhotos.map((photo, idx) => {
+    const filePath = photo.src;
+    const isVideo = filePath.toLowerCase().endsWith('.mp4');
+    const iconHTML = isVideo
+      ? `<span class="gallery-type-icon"><i class="fas fa-video"></i></span>`
+      : `<span class="gallery-type-icon"><i class="fas fa-image"></i></span>`;
+    if (isVideo) {
+      return `
+      <div class="gallery-item">
+        <video data-idx="${idx}" class="gallery-photo" muted preload="metadata">
+          <source src="${filePath}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        ${iconHTML}
+      </div>
+    `;
+    } else {
+      return `
+      <div class="gallery-item">
+        <img src="${filePath}" alt="${photo.alt}" class="gallery-photo" data-idx="${idx}">
+        ${iconHTML}
+      </div>
+    `;
+    }
+  }).join("");
+  document.getElementById("cv-photos").innerHTML = `<div class="gallery-track">${photos}</div>`;
+
+  // Modal logic for image/video preview
+  if (!document.getElementById("photo-modal")) {
+    const modalHTML = `
+      <div id="photo-modal" class="photo-modal">
+        <span class="photo-modal-close">&times;</span>
+        <div class="photo-modal-content"></div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+    document.querySelector(".photo-modal-close").onclick = () => {
+      document.getElementById("photo-modal").style.display = "none";
+      // Stop video if open
+      const modalContent = document.querySelector(".photo-modal-content");
+      modalContent.innerHTML = "";
+    };
+  }
+
+  document.querySelectorAll(".gallery-photo").forEach(el => {
+    el.onclick = function () {
+      const idx = this.dataset.idx;
+      const photo = cvPhotos[idx];
+      const modal = document.getElementById("photo-modal");
+      const modalContent = modal.querySelector(".photo-modal-content");
+      modalContent.innerHTML = ""; // Clear previous
+
+      if (photo.src.toLowerCase().endsWith('.mp4')) {
+        // Video: allow controls, autoplay, but don't play in gallery
+        const video = document.createElement("video");
+        video.src = photo.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.style.maxWidth = "90vw";
+        video.style.maxHeight = "90vh";
+        video.style.borderRadius = "1rem";
+        video.setAttribute("controlsList", "nodownload noremoteplayback");
+        modalContent.appendChild(video);
+      } else {
+        // Image
+        const img = document.createElement("img");
+        img.src = photo.src;
+        img.alt = photo.alt;
+        img.style.maxWidth = "90vw";
+        img.style.maxHeight = "90vh";
+        img.style.borderRadius = "1rem";
+        img.setAttribute("draggable", "false");
+        img.setAttribute("oncontextmenu", "return false;");
+        img.style.userSelect = "none";
+        modalContent.appendChild(img);
+      }
+      modal.style.display = "flex";
+    };
+  });
 }
 
 async function renderCompositions() {

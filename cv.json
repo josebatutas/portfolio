@@ -8,28 +8,40 @@
   "photoCV": "./img/fotocv.jpg",
   "photos": [
     {
-      "alt": "CÁMARA",
-      "src": "./img/camara1.jpg"
+      "alt": "Sacro. Madrid. Ave Maria [2022]",
+      "src": "./media/2022_sacro_madrid_ave_maria.mp4"
+    },
+    {
+      "alt": "Video 1",
+      "src": "./media/video1.mp4"
+    },
+    {
+      "alt": "Sacro. Calzada de Oropesa. Stabat Matter [2025]",
+      "src": "./media/2025_sacro_calzada_oropesa_stabat_matter.mp4"
     },
     {
       "alt": "CÁMARA",
-      "src": "./img/camara2.jpg"
+      "src": "./media/camara1.jpg"
+    },
+    {
+      "alt": "CÁMARA",
+      "src": "./media/camara2.jpg"
     },
     {
       "alt": "Coro Orquesta Pop",
-      "src": "./img/coro_orquesta_pop.jpg"
+      "src": "./media/coro_orquesta_pop.jpg"
     },
     {
       "alt": "Coro Orquesta Sacro",
-      "src": "./img/coro_orquesta_sacro.jpg"
+      "src": "./media/coro_orquesta_sacro.jpg"
     },
     {
       "alt": "Coro",
-      "src": "./img/coro.jpg"
+      "src": "./media/coro.jpg"
     },
     {
       "alt": "Orquesta grupo de baile",
-      "src": "./img/orquesta_grupo_baile.jpg"
+      "src": "./media/orquesta_grupo_baile.jpg"
     }
   ],
   "bio": "Natural de Huete (Cuenca). Siendo todavía muy joven, su familia se trasladó a la ciudad valenciana de <i>Carcaixent (Valencia)</i>, donde a los nueve años iniciaría sus estudios musicales en el <b>Conservatorio Municipal <i>'Maestro Vert'</i></b>, formándose más tarde como músico en la <b>Banda de la Sociedad Musical <i>'Lira Carcaixentina'</i></b>, con la que ha participado en <b>numerosos Certámenes obteniendo Premios y galardones</b>.<br/><br/><b>Titulado Superior en Música</b> en la especialidad de <i>DIRECCIÓN DE ORQUESTA Y COROS</i> y también en <i>CLARINETE</i>, ha realizado además estudios paralelos de <i>Violonchelo, Piano, Saxofón, Composición</i> con profesores como Luis Blanes Arqués, Anton García Abril, José Luis de la Fuente Chaforlé, clases de <i>Canto</i> con Rosa Ruíz y Mariano Alises, así como diversos cursos de <i>Dirección de Orquesta y Banda</i>, con maestros como Rafael Sanz Espert, Enrique García Asensio y Edgar Martín</i>. Ha realizado numerosos cursos de <i>'Informática Musical'</i>.",
